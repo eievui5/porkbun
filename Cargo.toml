@@ -1,0 +1,21 @@
+[package]
+name = "porkbun"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+reqwest = { version = "0.12.5", features = ["blocking", "rustls-tls"], default-features = false }
+serde = { version = "1.0.204", features = ["derive"] }
+serde_json = "1.0.122"
+thiserror = "1.0.63"
+tracing = { version = "0.1.40", optional = true }
+
+[features]
+tracing = ["dep:tracing"]
+tracing_debug = ["tracing"]
+
+[workspace]
+members = ["ddns"]
+
+[workspace.dependencies]
+porkbun = { path = "." }
