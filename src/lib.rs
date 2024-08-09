@@ -127,7 +127,6 @@ impl Client {
         const URL: &str = "https://api-ipv4.porkbun.com/api/json/v3/ping";
 
         #[derive(Clone, Debug, serde::Deserialize)]
-        #[allow(dead_code, reason = "used by Debug impl")]
         struct PingResponse {
             status: Status,
             #[serde(default)]
@@ -258,7 +257,7 @@ impl Client {
         content: &str,
         ttl: Option<&str>,
         prio: Option<&str>,
-    ) -> Result<Option<String>> {
+    ) -> Result<Option<u32>> {
         #[derive(Clone, Debug, serde::Serialize)]
         struct Body<'a> {
             #[serde(rename = "secretapikey")]
@@ -278,7 +277,7 @@ impl Client {
             status: Status,
             #[serde(default)]
             message: String,
-            id: Option<String>,
+            id: Option<u32>,
         }
 
         let url = format!("https://api.porkbun.com/api/json/v3/dns/create/{domain}");
